@@ -1,0 +1,31 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+ body{font:12px -apple-system,sans-serif;margin:10px;background:#fff}
+ .row{display:flex;gap:6px;align-items:center;margin-bottom:6px;border-bottom:1px solid #eee}
+ .row b{width:130px}
+ .cell{width:180px;height:142px;border:1px solid #ddd}
+ .cell svg{width:100%;height:100%}
+ .fig-part{fill:none;stroke-linecap:round;stroke-linejoin:round}
+ .fig-ink{stroke:#1f2a30}.fig-hi{stroke:#e76f51}.fig-ink.fig-far{stroke:#a9b4ba}.fig-hi.fig-far{opacity:.5}
+ .fig-ink-fill{fill:#1f2a30}.fig-hi-fill{fill:#e76f51}
+ .fig-ground{stroke:#ddd;stroke-width:2}.fig-mat{fill:#2a9d8f;opacity:.35}.fig-mat-top{fill:#2a9d8f;opacity:.15}.fig-wall{fill:#cfc8bb}
+</style></head><body>
+<div id="out"></div>
+<script src="../js/exercises.js"></script>
+<script src="../js/figure.js"></script>
+<script>
+const {EXERCISES, Figure} = window.Mobility;
+const only = new URLSearchParams(location.search).get('only');
+const list = only ? EXERCISES.filter(e => only.split(',').includes(e.id)) : EXERCISES;
+for (const ex of list) {
+  const row = document.createElement('div'); row.className='row';
+  row.innerHTML = '<b>'+ex.id+'</b>';
+  const cyc = ex.fig.cycle || 4;
+  for (const f of [0, 0.125, 0.25, 0.375, 0.5]) {
+    const c = document.createElement('div'); c.className='cell'; row.appendChild(c);
+    Figure.mount(c, ex, {at: f*cyc});
+  }
+  document.getElementById('out').appendChild(row);
+}
+</script></body></html>
