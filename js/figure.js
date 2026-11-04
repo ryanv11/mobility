@@ -15,6 +15,9 @@
      hi      parts drawn in the highlight colour: armN armF legN legF lower upper neck
      wall    { at: point, dx } draws a wall or door frame through that point
      top     true for poses seen from above: a mat behind the figure, no floor line
+     chair   true to draw a chair under the hip (pose the hip at seat height)
+     step    point (eg 'toeN') standing on the edge of a step
+     roller  point (eg 'mid') resting on a foam roller
    A frame may also carry s (length scales, to fake foreshortening), w (weight of the
    move into it) and d (dwell multiplier for the move out of it). */
 (function (root) {
@@ -166,13 +169,15 @@
     const first = place(tl.frames[0]);
     let ground = -Infinity;
     for (const k in first) ground = Math.max(ground, first[k][1] + radius(k));
-    const bottom = fig.top ? maxY : ground;
+    // Standing on a step: the real floor is lower than the feet.
+    const floor = ground + (fig.step ? 18 : 0);
+    const bottom = fig.top ? maxY : floor;
     const scale = Math.max(1, (maxX - minX + 28) / BOX_W, (bottom - minY + 28) / BOX_H);
     const vw = BOX_W * scale;
     const vh = BOX_H * scale;
     const cx = (minX + maxX) / 2;
-    const vy = fig.top ? (minY + maxY) / 2 - vh / 2 : ground + 12 * scale - vh;
-    return { vx: cx - vw / 2, vy, vw, vh, cx, ground, minX, maxX, minY, maxY, first };
+    const vy = fig.top ? (minY + maxY) / 2 - vh / 2 : floor + 12 * scale - vh;
+    return { vx: cx - vw / 2, vy, vw, vh, cx, ground, floor, minX, maxX, minY, maxY, first };
   }
 
   function el(name, attrs, parent) {
@@ -200,12 +205,27 @@
         rx: 10, class: 'fig-mat-top',
       }, svg);
     } else {
-      el('line', { x1: box.vx, x2: box.vx + box.vw, y1: box.ground + 1, y2: box.ground + 1, class: 'fig-ground' }, svg);
-      if (onFloor) {
+      el('line', { x1: box.vx, x2: box.vx + box.vw, y1: box.floor + 1, y2: box.floor + 1, class: 'fig-ground' }, svg);
+      if (onFloor && !fig.chair) {
         el('rect', { x: box.minX - 8, y: box.ground - 1, width: box.maxX - box.minX + 16, height: 4, rx: 2, class: 'fig-mat' }, svg);
       }
     }
     const g = el('g', {}, svg);
+    if (fig.chair) {
+      const [hx, hy] = box.first.hip;
+      const seat = hy + WIDTH.torso / 2;
+      el('rect', { x: hx - 18, y: seat, width: 40, height: 5, rx: 2, class: 'fig-wall' }, g);
+      el('rect', { x: hx + 17, y: seat, width: 4, height: box.floor - seat, class: 'fig-wall' }, g);
+      el('rect', { x: hx - 18, y: seat, width: 4, height: box.floor - seat, class: 'fig-wall' }, g);
+      el('rect', { x: hx - 22, y: seat - 46, width: 5, height: 51, rx: 2, class: 'fig-wall' }, g);
+    }
+    if (fig.step) {
+      const x = box.first[fig.step][0] - 8;
+      el('rect', { x, y: box.ground, width: box.vx + box.vw - x + 5, height: box.floor - box.ground, class: 'fig-wall' }, g);
+    }
+    if (fig.roller) {
+      el('circle', { cx: box.first[fig.roller][0], cy: box.ground - 9, r: 9, class: 'fig-wall' }, g);
+    }
     if (fig.wall) {
       const x = box.first[fig.wall.at][0] + (fig.wall.dx || 0);
       el('rect', { x: x, y: box.vy - 5, width: 6, height: box.ground - box.vy + 5, class: 'fig-wall' }, g);

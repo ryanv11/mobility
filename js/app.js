@@ -9,7 +9,7 @@
   const $$ = (sel, el = document) => [...el.querySelectorAll(sel)];
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
   const areaLabel = (id) => (AREAS.find((a) => a.id === id) || {}).label || id;
-  const POSITION = { standing: 'Standing', kneeling: 'On the floor', seated: 'Seated on the floor', lying: 'Lying down' };
+  const POSITION = { standing: 'Standing', chair: 'On a chair', kneeling: 'On the floor', seated: 'Seated on the floor', lying: 'Lying down' };
   const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
   const stretches = (n) => `${n} stretch${n === 1 ? '' : 'es'}`;
 
@@ -159,7 +159,7 @@
         <section class="block"><h2>Transition between stretches</h2>${seg('transition', [5, 10, 15], 'sec')}</section>
         <section class="block">
           <label class="switch"><input type="checkbox" data-key="standingOnly"${prefs.standingOnly ? ' checked' : ''}>
-            <span class="switch-text"><b>Standing only</b><small>No floor work, handy at the office</small></span><span class="knob"></span></label>
+            <span class="switch-text"><b>No floor work</b><small>Standing and chair stretches only, handy at the office</small></span><span class="knob"></span></label>
         </section>
         <button class="primary big" data-act="build"${prefs.areas.length ? '' : ' disabled'}>Build my session</button>
         ${recent.length ? `<section class="block"><h2>Recent</h2>${historyList(recent)}</section>` : ''}
@@ -234,13 +234,13 @@
 
   function renderPreview() {
     const p = state.plan;
-    const floorAt = p.items.findIndex((it) => it.ex.position !== 'standing');
+    const floorAt = p.items.findIndex((it) => !Planner.OFF_FLOOR.includes(it.ex.position));
     show(`
       <div class="screen preview">
         <header class="bar"><button class="icon" data-act="home" aria-label="Back">${ICON.back}</button><h1>Your session</h1><span class="icon-spacer"></span></header>
         <p class="summary"><b>${p.minutes} minutes</b> · ${stretches(p.items.length)} · ${p.transition}s transitions</p>
         <p class="muted center">${p.areas.length === AREAS.length ? 'Full body' : p.areas.map(areaLabel).join(' · ')}</p>
-        ${floorAt > 0 ? `<p class="note">Standing first, then down to the floor from stretch ${floorAt + 1}.</p>` : ''}
+        ${floorAt > 0 ? `<p class="note">Off the floor first, then down to the floor from stretch ${floorAt + 1}.</p>` : ''}
         <ol class="rows">${p.items.map(planRow).join('')}</ol>
         <div class="footer">
           <button class="secondary" data-act="shuffle">${ICON.shuffle}<span>Shuffle</span></button>

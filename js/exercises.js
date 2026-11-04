@@ -1,8 +1,8 @@
 /* The stretch library. Each exercise:
      areas     focus areas it mainly works (used to pick it)
      also      areas it works a little (used to fill gaps)
-     position  standing | kneeling | seated | lying  (sessions are ordered top to bottom so
-               you only get down to the floor once)
+     position  standing | chair | kneeling | seated | lying  (sessions are ordered top to bottom
+               so you only get down to the floor once)
      face      for lying: prone, side or supine
      kind      static (a hold) or dynamic (slow, controlled movement)
      sides     true when it's done on each side in turn
@@ -868,6 +868,446 @@
       fig: {
         anchor: 'handN', hi: ['armN'], cycle: 3, dwell: 0.25,
         frames: [{ ...ALLFOURS }, { ...ALLFOURS, uaN: 200, faN: 200, uaF: 200, faF: 200, thN: 208, thF: 208, t1: 72, t2: 72 }],
+      },
+    },
+
+    // ---------- Added Nov 2026: hips ----------
+    {
+      id: 'hip-90-90', name: '90/90 hip switches', areas: ['glutes', 'hipFlexors'], also: ['innerThighs'],
+      position: 'seated', kind: 'dynamic', sides: false,
+      muscles: ['Hip internal rotators', 'Hip external rotators', 'Gluteus medius'],
+      steps: [
+        'Sit with both knees bent to 90°: front shin across in front of you, back shin out to the side.',
+        'Put your hands on the floor behind you and sit tall.',
+        'Lift both knees and rotate them over to the other side, landing in the mirror-image position.',
+        'Switch back and forth slowly, pausing in each position.',
+      ],
+      tips: ['Keep your chest up and both sit bones close to the floor.', 'Let your feet stay roughly where they are; the hips do the turning.'],
+      fig: {
+        view: 'front', anchor: 'hip', hi: ['legN', 'legF'], cycle: 5, dwell: 0.35,
+        frames: [
+          { thN: 250, shN: 95, ftN: 95, thF: 100, shF: 185, ftF: 185, uaN: 196, faN: 196, uaF: 164, faF: 164, s: { uaN: 0.55, faN: 0.45, uaF: 0.55, faF: 0.45, thN: 0.75, shN: 0.8, shF: 0.35, ftN: 0.5, ftF: 0.5 } },
+          { thN: 335, shN: 190, ftN: 190, thF: 25, shF: 170, ftF: 170, uaN: 196, faN: 196, uaF: 164, faF: 164, s: { uaN: 0.55, faN: 0.45, uaF: 0.55, faF: 0.45, thN: 0.55, shN: 0.6, thF: 0.55, shF: 0.6, ftN: 0.5, ftF: 0.5 }, d: 0 },
+          { thN: 260, shN: 175, ftN: 175, thF: 110, shF: 265, ftF: 265, uaN: 196, faN: 196, uaF: 164, faF: 164, s: { uaN: 0.55, faN: 0.45, uaF: 0.55, faF: 0.45, thF: 0.75, shF: 0.8, shN: 0.35, ftN: 0.5, ftF: 0.5 } },
+        ],
+      },
+    },
+    {
+      id: 'couch-stretch', name: 'Couch stretch', areas: ['quads', 'hipFlexors'], also: [],
+      position: 'kneeling', kind: 'static', sides: true,
+      muscles: ['Rectus femoris', 'Iliopsoas', 'Vastus muscles'],
+      steps: [
+        'Kneel with your back to a wall or sofa, and slide one knee into the corner with that shin up the wall.',
+        'Step the other foot forward, knee over ankle.',
+        'Start leaning forward with your hands on the front knee.',
+        'Squeeze your glutes and slowly bring your torso upright.',
+      ],
+      tips: ['This one is intense: stay leaning forward until it eases.', 'Pad the back knee with a cushion.'],
+      fig: {
+        anchor: 'kneeN', hi: ['legN'], cycle: 7, dwell: 0.45, wall: { at: 'kneeN', dx: -12 },
+        frames: [
+          { thN: 195, shN: 2, ftN: 2, thF: 92, shF: 180, ftF: 90, t1: 25, t2: 25, n: 30, uaN: 150, faN: 140, uaF: 150, faF: 140, s: { ftN: 0.7 } },
+          { thN: 195, shN: 2, ftN: 2, thF: 92, shF: 180, ftF: 90, t1: -3, t2: -3, n: -3, uaN: 195, faN: 160, uaF: 195, faF: 160, s: { ftN: 0.7 } },
+        ],
+      },
+    },
+    {
+      id: 'frog', name: 'Frog stretch', areas: ['innerThighs'], also: ['glutes'],
+      position: 'kneeling', kind: 'static', sides: false,
+      muscles: ['Adductors', 'Gracilis', 'Hip rotators'],
+      steps: [
+        'Start on hands and knees, then slide your knees out wide.',
+        'Turn your feet out so your ankles line up behind your knees.',
+        'Lower onto your forearms.',
+        'Ease your hips back until you feel your inner thighs stretch.',
+      ],
+      tips: ['Pad your knees well.', 'Rock gently back and forward rather than forcing the depth.'],
+      fig: {
+        view: 'front', top: true, anchor: 'hip', hi: ['legN', 'legF'], cycle: 7, dwell: 0.45,
+        frames: [
+          { thN: 282, shN: 182, ftN: 182, thF: 78, shF: 178, ftF: 178, uaN: 0, faN: 0, hN: 0, uaF: 0, faF: 0, hF: 0, s: { uaN: 0.3, uaF: 0.3, ftN: 0.4, ftF: 0.4 } },
+          { thN: 266, shN: 182, ftN: 182, thF: 94, shF: 178, ftF: 178, uaN: 0, faN: 0, hN: 0, uaF: 0, faF: 0, hF: 0, s: { uaN: 0.3, uaF: 0.3, ftN: 0.4, ftF: 0.4, t1: 0.9 } },
+        ],
+      },
+    },
+    {
+      id: 'cossack', name: 'Cossack squat', areas: ['innerThighs'], also: ['hamstrings', 'glutes', 'calves'],
+      position: 'standing', kind: 'dynamic', sides: false,
+      muscles: ['Adductors', 'Hamstrings', 'Gluteus maximus', 'Ankles'],
+      steps: [
+        'Stand with your feet very wide, toes slightly out.',
+        'Sit down over one leg, keeping that heel down, while the other leg straightens with its toes pointing up.',
+        'Pause at the bottom, then shift across to the other side.',
+        'Keep moving slowly from side to side.',
+      ],
+      tips: ['Only go as low as you can with the bent heel down.', 'Hold onto something in front of you for balance if needed.'],
+      fig: {
+        view: 'front', anchor: 'ankleN', hi: ['legN', 'legF'], cycle: 5, dwell: 0.3,
+        frames: [
+          { thN: 257, shN: 155, ftN: 270, thF: 125, shF: 125, ftF: 0, uaN: 200, faN: 80, uaF: 160, faF: 280, s: { thF: 0.967, shF: 0.967, ftF: 1.3 } },
+          { thN: 235, shN: 235, ftN: 0, thF: 103, shF: 205, ftF: 90, uaN: 200, faN: 80, uaF: 160, faF: 280, s: { thN: 0.967, shN: 0.967, ftN: 1.3 } },
+        ],
+      },
+    },
+    {
+      id: 'lizard', name: 'Lizard pose', areas: ['hipFlexors', 'innerThighs'], also: ['glutes', 'hamstrings'],
+      position: 'kneeling', kind: 'static', sides: true,
+      muscles: ['Iliopsoas', 'Adductors', 'Gluteus maximus'],
+      steps: [
+        'From a lunge, lower the back knee to the floor.',
+        'Place both hands on the floor inside your front foot.',
+        'Walk the front foot slightly out and let your hips sink.',
+        'Lower onto your forearms if that’s comfortable.',
+      ],
+      tips: ['Let the front knee fall open a little to feel more in the groin.', 'Rest your forearms on a cushion or block if the floor is too far.'],
+      fig: {
+        anchor: 'kneeF', hi: ['legN', 'legF'], cycle: 7, dwell: 0.45,
+        frames: [
+          { thF: 235, shF: 270, ftF: 270, thN: 85, shN: 226, ftN: 90, t1: 55, t2: 55, n: 80, uaN: 180, faN: 180, hN: 90, uaF: 180, faF: 180, hF: 90 },
+          { thF: 235, shF: 270, ftF: 270, thN: 85, shN: 226, ftN: 90, t1: 75, t2: 85, n: 100, uaN: 180, faN: 90, hN: 90, uaF: 180, faF: 90, hF: 90 },
+        ],
+      },
+    },
+    {
+      id: 'happy-baby', name: 'Happy baby', areas: ['innerThighs', 'glutes'], also: ['lowerBack', 'hamstrings'],
+      position: 'lying', face: 'supine', kind: 'static', sides: false,
+      muscles: ['Adductors', 'Gluteus maximus', 'Hamstrings', 'Lower back'],
+      steps: [
+        'Lie on your back and draw your knees towards your armpits.',
+        'Hold the outsides of your feet (or your ankles or shins), soles facing the ceiling.',
+        'Gently pull your knees down towards the floor beside your chest.',
+        'Rock slowly side to side if it feels good.',
+      ],
+      tips: ['Keep your tailbone and head on the floor.', 'Hold your shins instead if your feet are out of reach.'],
+      fig: {
+        anchor: 'hip', hi: ['legN', 'legF'], cycle: 6, dwell: 0.45,
+        frames: [
+          { ...SUPINE, thN: -10, shN: 30, ftN: 90, thF: -8, shF: 32, ftF: 92, uaN: 30, faN: 30, hN: 30, uaF: 30, faF: 30, hF: 30 },
+          { ...SUPINE, thN: -40, shN: 0, ftN: 90, thF: -38, shF: 2, ftF: 92, uaN: 22, faN: 22, hN: 22, uaF: 22, faF: 22, hF: 22 },
+        ],
+      },
+    },
+    {
+      id: 'hip-cars', name: 'Standing hip circles', areas: ['hipFlexors', 'glutes'], also: ['innerThighs'],
+      position: 'standing', kind: 'dynamic', sides: true,
+      muscles: ['Hip flexors', 'Gluteus medius', 'Deep hip rotators'],
+      steps: [
+        'Stand tall with a hand on a wall for balance.',
+        'Lift one knee up in front of you.',
+        'Open the knee out to the side, then sweep it behind you.',
+        'Lower it and repeat, making the biggest circle you can without your body moving. Reverse halfway.',
+      ],
+      tips: ['Move slowly: these are about control, not momentum.', 'Keep your pelvis level and your standing leg still.'],
+      fig: {
+        anchor: 'ankleF', hi: ['legN'], cycle: 6, dwell: 0, ease: 'linear', mode: 'loop', wall: { at: 'handF', dx: 4 },
+        frames: [
+          { uaF: 90, faF: 90, hF: 0 },
+          { thN: 95, shN: 185, uaF: 90, faF: 90, hF: 0 },
+          { thN: 95, shN: 185, uaF: 90, faF: 90, hF: 0, s: { thN: 0.25 } },
+          { thN: 205, shN: 255, uaF: 90, faF: 90, hF: 0 },
+          { uaF: 90, faF: 90, hF: 0 },
+        ],
+      },
+    },
+
+    // ---------- Added Nov 2026: spine ----------
+    {
+      id: 'cobra', name: 'Cobra', areas: ['lowerBack'], also: ['chest', 'hipFlexors'],
+      position: 'lying', face: 'prone', kind: 'static', sides: false,
+      muscles: ['Abdominals', 'Hip flexors', 'Spinal extensors', 'Pectorals'],
+      steps: [
+        'Lie on your front with your hands under your shoulders and the tops of your feet down.',
+        'Press into your hands and slowly lift your chest.',
+        'Straighten your arms only as far as your lower back is happy; keep your hips down.',
+        'Hold, then lower slowly.',
+      ],
+      tips: ['Try the sphinx stretch first if this pinches your lower back.', 'Draw your shoulders down away from your ears.'],
+      fig: {
+        anchor: 'hip', hi: ['lower'], cycle: 6, dwell: 0.45,
+        frames: [
+          { ...PRONE, uaN: 250, faN: 100, hN: 90, uaF: 250, faF: 100, hF: 90 },
+          { ...PRONE, t1: 50, t2: 20, n: 0, uaN: 165, faN: 190, hN: 90, uaF: 165, faF: 190, hF: 90 },
+        ],
+      },
+    },
+    {
+      id: 'seated-twist', name: 'Seated spinal twist', areas: ['lowerBack', 'upperBack'], also: ['glutes'],
+      position: 'seated', kind: 'static', sides: true,
+      muscles: ['Obliques', 'Spinal rotators', 'Gluteus medius'],
+      steps: [
+        'Sit with both legs straight, then bend one knee and cross that foot over the other leg.',
+        'Put the hand on the bent-knee side on the floor behind you.',
+        'Hug the bent knee with your other arm, or hook that elbow outside it.',
+        'Sit tall, breathe in, then twist towards the bent knee as you breathe out.',
+      ],
+      tips: ['Grow taller on each breath in and twist a little more on each breath out.', 'Turn your head last.'],
+      fig: {
+        anchor: 'hip', hi: ['lower', 'upper'], cycle: 6, dwell: 0.45,
+        frames: [
+          { ...SEATED, thN: 30, shN: 160, ftN: 90, uaN: 150, faN: 100, uaF: 150, faF: 100 },
+          { ...SEATED, thN: 30, shN: 160, ftN: 90, uaN: 205, faN: 200, hN: 270, uaF: 125, faF: 60, n: 10 },
+        ],
+      },
+    },
+    {
+      id: 'tspine-rotation', name: 'Kneeling upper-back rotation', areas: ['upperBack'], also: ['shoulders', 'chest'],
+      position: 'kneeling', kind: 'dynamic', sides: true,
+      muscles: ['Thoracic rotators', 'Rhomboids', 'Pectorals'],
+      steps: [
+        'Start on hands and knees and place one hand behind your head.',
+        'Rotate that elbow down towards your supporting arm.',
+        'Then open it up towards the ceiling, following it with your eyes.',
+        'Move slowly through the full range.',
+      ],
+      tips: ['Sit your hips back towards your heels to keep the twist in your upper back.', 'Breathe out as you open up.'],
+      fig: {
+        anchor: 'kneeN', hi: ['upper', 'armN'], cycle: 4, dwell: 0.25,
+        frames: [
+          { ...ALLFOURS, t2: 80, n: 110, uaN: 175, faN: 37, hN: 37 },
+          { ...ALLFOURS, t2: 66, n: 60, uaN: -5, faN: 142, hN: 142 },
+        ],
+      },
+    },
+    {
+      id: 'thoracic-extension', name: 'Upper-back extension on a roller', areas: ['upperBack'], also: ['chest'],
+      position: 'lying', face: 'supine', kind: 'dynamic', sides: false,
+      muscles: ['Thoracic extensors', 'Pectorals', 'Abdominals'],
+      steps: [
+        'Lie on your back with a foam roller (or a firmly rolled towel) across your back, just below your shoulder blades.',
+        'Bend your knees with your feet flat, hips on the floor.',
+        'Reach your arms overhead and let your upper back drape back over the roller.',
+        'Come back up, then shift the roller a little higher and repeat.',
+      ],
+      tips: ['Keep the movement in your upper back, not your lower back.', 'Support your head with your hands if your neck is tired.'],
+      fig: {
+        anchor: 'hip', roller: 'mid', hi: ['upper'], cycle: 5, dwell: 0.3,
+        frames: [
+          { ...BRIDGE_START, t1: 318.6, t2: 300, n: 290, uaN: 330, faN: 330, hN: 330, uaF: 330, faF: 330, hF: 330 },
+          { ...BRIDGE_START, t1: 318.6, t2: 250, n: 250, uaN: 245, faN: 245, hN: 245, uaF: 245, faF: 245, hF: 245 },
+        ],
+      },
+    },
+    {
+      id: 'pelvic-tilts', name: 'Pelvic tilts', areas: ['lowerBack'], also: ['glutes'],
+      position: 'lying', face: 'supine', kind: 'dynamic', sides: false,
+      muscles: ['Abdominals', 'Lumbar erectors', 'Gluteus maximus'],
+      steps: [
+        'Lie on your back with your knees bent and feet flat.',
+        'Gently arch your lower back so a small gap opens under it.',
+        'Then flatten your back into the floor by tilting your pelvis and lightly tensing your abs.',
+        'Rock slowly between the two.',
+      ],
+      tips: ['Small movements are fine; this is a gentle warm-up.', 'Breathe in as you arch, out as you flatten.'],
+      fig: {
+        anchor: 'ankleN', hi: ['lower'], cycle: 4, dwell: 0.25,
+        frames: [{ ...BRIDGE_START, t1: 276, t2: 268 }, { ...BRIDGE_START, t1: 258, t2: 266 }],
+      },
+    },
+
+    // ---------- Added Nov 2026: shoulders & neck ----------
+    {
+      id: 'wall-slides', name: 'Wall slides', areas: ['shoulders', 'upperBack'], also: ['chest'],
+      position: 'standing', kind: 'dynamic', sides: false,
+      muscles: ['Lower trapezius', 'Serratus anterior', 'Rotator cuff'],
+      steps: [
+        'Stand with your back against a wall, feet a little forward.',
+        'Put the backs of your arms on the wall in a goalpost shape, elbows at shoulder height.',
+        'Slide your arms up the wall as far as you can while keeping them touching it.',
+        'Slide back down to the goalpost and repeat.',
+      ],
+      tips: ['Keep your lower back gently flat to the wall.', 'Only go as high as you can with your wrists still touching.'],
+      fig: {
+        view: 'front', anchor: 'ankleN', hi: ['armN', 'armF'], cycle: 4, dwell: 0.25,
+        frames: [{ uaN: 262, faN: 352, uaF: 98, faF: 8 }, { uaN: 330, faN: 345, uaF: 30, faF: 15 }],
+      },
+    },
+    {
+      id: 'sleeper', name: 'Sleeper stretch', areas: ['shoulders'], also: [],
+      position: 'lying', face: 'side', kind: 'static', sides: true,
+      muscles: ['Posterior rotator cuff', 'Infraspinatus', 'Teres minor'],
+      steps: [
+        'Lie on your side with your bottom arm out in front at shoulder height, elbow bent to 90° and fingers pointing up.',
+        'With your top hand, gently press the bottom wrist down towards the floor.',
+        'Stop when you feel a stretch at the back of the shoulder.',
+        'Hold, keeping your bottom shoulder blade tucked back.',
+      ],
+      tips: ['Roll your body back slightly if you feel pinching at the front of the shoulder.', 'Use a pillow under your head.'],
+      fig: {
+        top: true, anchor: 'hip', hi: ['armN'], cycle: 6, dwell: 0.45,
+        frames: [
+          { t1: 90, t2: 90, n: 90, thN: 180, shN: 270, ftN: 270, thF: 180, shF: 270, ftF: 270, uaN: 180, faN: 180, hN: 180, uaF: 185, faF: 200, s: { faN: 0.12, hN: 0.12, ftN: 0.5, ftF: 0.5 } },
+          { t1: 90, t2: 90, n: 90, thN: 180, shN: 270, ftN: 270, thF: 180, shF: 270, ftF: 270, uaN: 180, faN: 270, hN: 270, uaF: 205, faF: 255, s: { ftN: 0.5, ftF: 0.5 } },
+        ],
+      },
+    },
+    {
+      id: 'levator', name: 'Levator scapulae stretch', areas: ['neck'], also: ['shoulders'],
+      position: 'standing', kind: 'static', sides: true,
+      muscles: ['Levator scapulae', 'Upper trapezius'],
+      steps: [
+        'Sit or stand tall.',
+        'Turn your head about 45° to one side, then look down as if at your armpit.',
+        'Rest that hand on the back of your head and let its weight add a gentle stretch.',
+        'Hold, feeling it at the back and side of the opposite neck.',
+      ],
+      tips: ['Drop the opposite shoulder down, or hold the edge of your seat with that hand.', 'Let your hand rest; don’t pull.'],
+      fig: { view: 'front', anchor: 'ankleN', hi: ['neck'], cycle: 6, dwell: 0.45, frames: [{ ...ARMS_FRONT }, { n: 325, uaN: 300, faN: 60, hN: 60, uaF: 174, faF: 174, s: { faN: 0.55, hN: 0.5 } }] },
+    },
+
+    // ---------- Added Nov 2026: feet, calves & wrists ----------
+    {
+      id: 'toe-stretch', name: 'Kneeling toe stretch', areas: ['calves'], also: [],
+      position: 'kneeling', kind: 'static', sides: false,
+      muscles: ['Plantar fascia', 'Toe flexors', 'Foot intrinsics'],
+      steps: [
+        'Kneel with your toes tucked under, so you’re on the balls of your feet.',
+        'Slowly sit back towards your heels.',
+        'Rest your hands on your thighs and sit tall.',
+        'Hold, feeling the stretch through the soles of your feet and toes.',
+      ],
+      tips: ['Lean forward onto your hands to take some weight off if it’s too intense.', 'Make sure all your toes are tucked, including the little ones.'],
+      fig: {
+        anchor: 'kneeN', hi: ['legN'], cycle: 6, dwell: 0.45,
+        frames: [
+          { thN: 180, shN: 280, ftN: 180, thF: 180, shF: 280, ftF: 180, s: { ftN: 0.9, ftF: 0.9 } },
+          { thN: 117, shN: 285, ftN: 180, thF: 117, shF: 285, ftF: 180, uaN: 160, faN: 110, uaF: 160, faF: 110, s: { ftN: 0.9, ftF: 0.9 } },
+        ],
+      },
+    },
+    {
+      id: 'step-calf', name: 'Calf drop off a step', areas: ['calves'], also: [],
+      position: 'standing', kind: 'static', sides: false,
+      muscles: ['Gastrocnemius', 'Soleus', 'Achilles tendon'],
+      steps: [
+        'Stand on the edge of a step with the balls of your feet on it, holding a rail.',
+        'Slowly lower your heels below the level of the step.',
+        'Hold at the bottom, keeping your knees straight.',
+        'Bend your knees slightly for the last part of the hold to reach the lower calf.',
+      ],
+      tips: ['Always hold on to something.', 'Lower slowly; no bouncing.'],
+      fig: { anchor: 'toeN', step: 'toeN', hi: ['legN', 'legF'], cycle: 6, dwell: 0.45, frames: [{}, { ftN: 55, ftF: 55 }] },
+    },
+    {
+      id: 'wall-forearm', name: 'Wall forearm stretch', areas: ['wrists'], also: [],
+      position: 'standing', kind: 'static', sides: true,
+      muscles: ['Wrist flexors', 'Forearm flexors', 'Biceps'],
+      steps: [
+        'Stand side-on to a wall and place your palm flat on it at shoulder height, fingers pointing down.',
+        'Keep your elbow straight.',
+        'Slowly turn your body away from the wall until you feel the inside of your forearm stretch.',
+        'Hold, then turn back.',
+      ],
+      tips: ['Move your hand lower to ease off.', 'Keep your shoulder down and relaxed.'],
+      fig: {
+        anchor: 'ankleN', hi: ['armN'], cycle: 6, dwell: 0.45, wall: { at: 'wristN', dx: 5 },
+        frames: [{ uaN: 90, faN: 90, hN: 180, t1: 2, t2: 2 }, { uaN: 92, faN: 92, hN: 180, t1: -4, t2: -6, n: -6 }],
+      },
+    },
+
+    // ---------- Added Nov 2026: whole body ----------
+    {
+      id: 'inchworm', name: 'Inchworm', areas: ['hamstrings'], also: ['shoulders', 'calves'],
+      position: 'standing', kind: 'dynamic', sides: false,
+      muscles: ['Hamstrings', 'Calves', 'Shoulders', 'Core'],
+      steps: [
+        'Stand tall, then fold forward and put your hands on the floor.',
+        'Walk your hands out until you’re in a plank.',
+        'Walk them back in towards your feet, keeping your legs as straight as you comfortably can.',
+        'Roll up to standing and repeat.',
+      ],
+      tips: ['Bend your knees as much as you need to get your hands down.', 'Take small steps with your hands.'],
+      fig: {
+        anchor: 'ankleN', hi: ['legN'], cycle: 7, dwell: 0.3,
+        frames: [
+          {},
+          { t1: 100, t2: 135, n: 160, uaN: 180, faN: 180, hN: 90, uaF: 180, faF: 180, hF: 90, thN: 168, thF: 168 },
+          { thN: 245, shN: 245, ftN: 200, thF: 245, shF: 245, ftF: 200, t1: 65, t2: 65, n: 75, uaN: 180, faN: 180, hN: 90, uaF: 180, faF: 180, hF: 90 },
+        ],
+      },
+    },
+    {
+      id: 'sun-salutation', name: 'Simple sun salutation', areas: ['hamstrings', 'lowerBack'], also: ['shoulders', 'calves', 'hipFlexors', 'chest'],
+      position: 'standing', kind: 'dynamic', sides: false,
+      muscles: ['Hamstrings', 'Spinal extensors', 'Shoulders', 'Calves'],
+      steps: [
+        'Stand tall and sweep your arms overhead.',
+        'Fold forward, hands to the floor, then step back to a plank.',
+        'Lower your hips and lift your chest into a cobra, then lift your hips back into downward dog.',
+        'Step forward to a fold and rise back up with arms overhead. Flow with your breath.',
+      ],
+      tips: ['Bend your knees freely in the folds.', 'Drop your knees to the floor in the plank if you need to.'],
+      fig: {
+        anchor: 'ankleN', hi: ['legN', 'lower'], cycle: 16, dwell: 0.35, mode: 'loop',
+        frames: [
+          {},
+          { uaN: 0, faN: 0, uaF: 0, faF: 0, t2: -5, n: -10 },
+          { t1: 100, t2: 135, n: 160, uaN: 180, faN: 180, hN: 90, uaF: 180, faF: 180, hF: 90, thN: 168, thF: 168 },
+          { thN: 245, shN: 245, ftN: 200, thF: 245, shF: 245, ftF: 200, t1: 65, t2: 65, n: 75, uaN: 180, faN: 180, hN: 90, uaF: 180, faF: 180, hF: 90 },
+          { thN: 265, shN: 268, ftN: 270, thF: 265, shF: 268, ftF: 270, t1: 50, t2: 20, n: 0, uaN: 175, faN: 180, hN: 90, uaF: 175, faF: 180, hF: 90 },
+          { ...DOWN_DOG },
+          { t1: 100, t2: 135, n: 160, uaN: 180, faN: 180, hN: 90, uaF: 180, faF: 180, hF: 90, thN: 168, thF: 168 },
+          { uaN: 0, faN: 0, uaF: 0, faF: 0, t2: -5, n: -10 },
+          {},
+        ],
+      },
+    },
+
+    // ---------- Added Nov 2026: on a chair ----------
+    {
+      id: 'chair-figure4', name: 'Chair figure-4 stretch', areas: ['glutes'], also: ['lowerBack'],
+      position: 'chair', kind: 'static', sides: true,
+      muscles: ['Piriformis', 'Gluteus maximus', 'Gluteus medius'],
+      steps: [
+        'Sit near the front of a chair with both feet flat.',
+        'Rest one ankle on the opposite knee and let the top knee drop open.',
+        'Sit tall, then hinge forward from your hips with a long back.',
+        'Hold where you feel it in the glute of the crossed leg.',
+      ],
+      tips: ['Press gently on the top knee for a little more.', 'Keep the crossed foot flexed to protect the knee.'],
+      fig: {
+        chair: true, anchor: 'hip', hi: ['legN'], cycle: 6, dwell: 0.45,
+        frames: [
+          { ...SEATED, shF: 180, ftF: 90, thN: 75, shN: 100, ftN: 10, uaN: 160, faN: 120, uaF: 160, faF: 120, s: { thN: 0.6, shN: 0.6 } },
+          { ...SEATED, shF: 180, ftF: 90, thN: 75, shN: 100, ftN: 10, t1: 25, t2: 30, n: 40, uaN: 140, faN: 120, uaF: 140, faF: 120, s: { thN: 0.6, shN: 0.6 } },
+        ],
+      },
+    },
+    {
+      id: 'chair-twist', name: 'Chair twist', areas: ['upperBack', 'lowerBack'], also: [],
+      position: 'chair', kind: 'static', sides: true,
+      muscles: ['Obliques', 'Spinal rotators', 'Rhomboids'],
+      steps: [
+        'Sit tall towards the front of a chair, feet flat and knees together.',
+        'Turn your chest to one side and hold the back of the chair with that hand.',
+        'Put the other hand on the outside of the opposite knee.',
+        'Breathe in to sit taller, breathe out to turn a little further.',
+      ],
+      tips: ['Keep your knees level and facing forward.', 'Turn from your ribs, not by yanking on the chair.'],
+      fig: {
+        chair: true, anchor: 'hip', hi: ['lower', 'upper'], cycle: 6, dwell: 0.45,
+        frames: [
+          { ...SEATED, shN: 180, ftN: 90, shF: 180, ftF: 90, uaN: 165, faN: 120, uaF: 165, faF: 120 },
+          { ...SEATED, shN: 180, ftN: 90, shF: 180, ftF: 90, uaN: 140, faN: 100, uaF: 235, faF: 200, n: 10 },
+        ],
+      },
+    },
+    {
+      id: 'chair-hamstring', name: 'Chair hamstring stretch', areas: ['hamstrings'], also: ['calves', 'lowerBack'],
+      position: 'chair', kind: 'static', sides: true,
+      muscles: ['Hamstrings', 'Gastrocnemius'],
+      steps: [
+        'Sit at the front edge of a chair.',
+        'Straighten one leg out in front, heel on the floor and toes up.',
+        'Sit tall, then hinge forward from your hips, reaching towards the straight leg.',
+        'Hold with your back long.',
+      ],
+      tips: ['Lead with your chest, not your head.', 'Bend the straight knee a touch if you feel it behind the knee.'],
+      fig: {
+        chair: true, anchor: 'hip', hi: ['legN'], cycle: 6, dwell: 0.45,
+        frames: [
+          { ...SEATED, thN: 124, shN: 124, shF: 180, ftF: 90, uaN: 165, faN: 140, uaF: 165, faF: 140 },
+          { ...SEATED, thN: 124, shN: 124, shF: 180, ftF: 90, t1: 45, t2: 60, n: 80, uaN: 120, faN: 115, uaF: 120, faF: 115 },
+        ],
       },
     },
   ];

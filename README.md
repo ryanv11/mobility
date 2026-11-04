@@ -12,17 +12,19 @@ runs full screen and works offline.
 - **Focus areas**: 12 areas (neck, shoulders, chest, upper and lower back, hip flexors, glutes,
   inner thighs, hamstrings, quads, calves and ankles, wrists), plus quick picks for *Desk reset*,
   *Lower body* and *Full body*.
-- **Session builder**: sessions start with the standing stretches and get down to the floor once,
+- **Session builder**: sessions start with standing and chair stretches and get down to the floor once,
   finishing lying down. It favours areas you haven't worked lately and avoids repeating last
   session's stretches. If your areas run out of stretches (for example 30 minutes of neck only),
   it adds stretches for nearby areas, marked "bonus". Tap ⇄ on any stretch to swap it, or Shuffle
   for a new session.
-- **Standing only**: no floor work, for the office.
+- **No floor work**: standing and chair stretches only, for the office.
 - **Timer**: a get-ready countdown (your transition time) before each stretch, a 5 s switch
   between sides, countdown beeps and spoken cues. Back, pause and skip buttons. The screen stays on
   during a session.
 - **During each stretch**: an animated demo figure with the working limbs in orange, the target
   muscles, steps, tips and a link to video demos on YouTube.
+- **Mobility check**: a self-test per area gives a score, rates each area and suggests focus
+  areas; the home screen's one-tap *Today's session* rotates through your tight areas.
 - **Staying on track**: streak, this week's days against a weekly goal (Settings), and history.
   A session counts if you finish it or do at least a minute before ending it.
 
@@ -34,8 +36,9 @@ history.
 | Path | What it is |
 |---|---|
 | `index.html` | The page |
-| `js/exercises.js` | The 48 stretches: areas, muscles, steps, tips and demo poses |
-| `js/figure.js` | Draws and animates the demo figure from joint angles (format notes at the top) |
+| `js/exercises.js` | The 71 stretches: areas, muscles, steps, tips and demo poses |
+| `js/check.js` | The mobility check: one self-test per area |
+| `js/figure.js` | Draws and animates the demo figure from joint angles, plus wall, chair, step and roller props (format notes at the top) |
 | `js/planner.js` | Picks, orders and times the stretches for a session |
 | `js/app.js` | Screens, session player, sounds, history |
 | `css/style.css` | Styles (light and dark) |

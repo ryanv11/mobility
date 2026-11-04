@@ -23,7 +23,7 @@ for (const ex of EXERCISES) {
   if (ids.has(ex.id)) fail('duplicate id', ex.id);
   ids.add(ex.id);
   for (const a of [...ex.areas, ...ex.also]) if (!AREAS.some((x) => x.id === a)) fail('unknown area', ex.id + ' ' + a);
-  if (!['standing', 'kneeling', 'seated', 'lying'].includes(ex.position)) fail('bad position', ex.id);
+  if (!['standing', 'chair', 'kneeling', 'seated', 'lying'].includes(ex.position)) fail('bad position', ex.id);
   if (!ex.steps.length || !ex.tips.length || !ex.muscles.length) fail('missing text', ex.id);
   if (!ex.fig || !ex.fig.frames.length) fail('missing figure', ex.id);
 }
@@ -51,13 +51,13 @@ for (const minutes of [5, 10, 15, 30]) {
       if (p.lead > 15) fail('long lead-in ' + p.lead, tag);
       for (const it of p.items) {
         if (it.hold < 20) fail('hold under 20 s', tag + ' ' + it.ex.id + ' ' + it.hold);
-        if (standingOnly && it.ex.position !== 'standing') fail('floor stretch in standing-only', tag);
+        if (standingOnly && !Planner.OFF_FLOOR.includes(it.ex.position)) fail('floor stretch in no-floor session', tag);
         if (Planner.score(it.ex, areas) === 0 && !it.extra) fail('off-target stretch not marked extra', tag + ' ' + it.ex.id);
       }
       const once = p.items.filter((it) => it.set === 1).map((it) => it.ex.id);
       if (new Set(once).size !== once.length) fail('repeated stretch', tag);
       // Floor only once: positions never go back up.
-      const rank = { standing: 0, kneeling: 1, seated: 2, lying: 3 };
+      const rank = { standing: 0, chair: 1, kneeling: 2, seated: 3, lying: 4 };
       for (let i = 1; i < p.items.length; i++) {
         if (rank[p.items[i].ex.position] < rank[p.items[i - 1].ex.position]) fail('goes back up from the floor', tag);
       }

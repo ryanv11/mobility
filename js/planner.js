@@ -9,7 +9,8 @@
   const SWITCH = 5; // seconds to change sides
   const MIN_HOLD = 20;
   const CAP = { static: 120, dynamic: 75 };
-  const ORDER = { standing: 0, kneeling: 1, seated: 2, lying: 3 };
+  const ORDER = { standing: 0, chair: 1, kneeling: 2, seated: 3, lying: 4 };
+  const OFF_FLOOR = ['standing', 'chair'];
   const FACE = { prone: 0, side: 1, supine: 2 };
 
   const sides = (ex) => (ex.sides ? 2 : 1);
@@ -41,7 +42,7 @@
   }
 
   function eligible(opts) {
-    return M.EXERCISES.filter((ex) => (!opts.standingOnly || ex.position === 'standing') && !(opts.hidden || []).includes(ex.id));
+    return M.EXERCISES.filter((ex) => (!opts.standingOnly || OFF_FLOOR.includes(ex.position)) && !(opts.hidden || []).includes(ex.id));
   }
 
   // Where to look when the chosen areas run out of stretches.
@@ -210,5 +211,5 @@
     return segs;
   }
 
-  M.Planner = { plan, swap, timeline, score, SWITCH };
+  M.Planner = { plan, swap, timeline, score, SWITCH, OFF_FLOOR };
 })(typeof window !== 'undefined' ? window : globalThis);

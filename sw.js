@@ -1,6 +1,6 @@
 /* Offline support: serve from the cache, refresh it in the background.
    Bump VERSION whenever any file changes so phones pick up the new copy. */
-const VERSION = 'mobility-v1';
+const VERSION = 'mobility-v2';
 const FILES = [
   './', './index.html', './manifest.webmanifest', './css/style.css',
   './js/exercises.js', './js/check.js', './js/figure.js', './js/planner.js', './js/app.js',
